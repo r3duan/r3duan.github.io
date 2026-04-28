@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>r3duan — Cloud & Security Engineer</title>
+    <meta name="description" content="r3duan — Cloud & Security Engineer specializing in Microsoft 365, Sentinel SIEM, DFIR, and Blue Team. Sharing writeups, cert reviews, and lab builds." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="r3duan" />
+    <meta property="og:url" content="https://0xr3duan.me/" />
+    <meta property="og:title" content="r3duan — Cloud & Security Engineer" />
+    <meta property="og:description" content="Cloud & Security Engineer specializing in Microsoft 365, Sentinel SIEM, DFIR, and Blue Team operations." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@r3duan" />
+    <meta name="twitter:title" content="r3duan — Cloud & Security Engineer" />
+    <meta name="twitter:description" content="Cloud & Security Engineer specializing in Microsoft 365, Sentinel SIEM, DFIR, and Blue Team operations." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23a855f7'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='42' font-weight='bold' fill='white' text-anchor='middle'%3Er3%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn { animation: fadeIn 0.5s ease-out; }
+
+        @keyframes pulseRing {
+            0%   { transform: scale(1);    opacity: 0.5; }
+            100% { transform: scale(1.22); opacity: 0; }
+        }
+        .animate-pulse-ring { animation: pulseRing 2s ease-out infinite; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideDown { animation: slideDown 0.18s ease-out; }
+
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .badge-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 160s linear infinite;
+        }
+        .badge-marquee-track:hover { animation-play-state: paused; }
+
+        .hero-dots {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Katakana rain canvas */
+        #r3-rain {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.18;
+            display: none;
+        }
+
+        /* Marquee fade overlays */
+        .marquee-fade-l { background: linear-gradient(to right, #fff, transparent); }
+        .marquee-fade-r { background: linear-gradient(to left,  #fff, transparent); }
+
+        /* ============================================================
+           DARK MODE — purple/emerald Blade Runner palette
+           ============================================================ */
+
+        .dark.min-h-screen {
+            background: linear-gradient(135deg, #07030f 0%, #0d061e 50%, #030b07 100%) !important;
+        }
+
+        .dark nav.sticky {
+            background-color: rgba(7,3,15,0.96) !important;
+            border-bottom-color: rgba(88,28,135,0.35) !important;
+        }
+
+        /* Surface backgrounds */
+        .dark .bg-white    { background-color: #100820 !important; }
+        .dark .bg-gray-50  { background-color: #07030f !important; }
+        .dark .bg-gray-100 { background-color: #1c1030 !important; }
+
+        /* Tinted sections */
+        .dark .bg-purple-50  { background-color: rgba(88,28,135,0.15) !important; }
+        .dark .bg-purple-100 { background-color: rgba(88,28,135,0.25) !important; }
+        .dark .bg-emerald-50 { background-color: rgba(6,78,59,0.12) !important; }
+        .dark .bg-green-50   { background-color: rgba(22,163,74,0.10) !important; }
+        .dark .bg-red-50     { background-color: rgba(220,38,38,0.10) !important; }
+        .dark .bg-orange-50  { background-color: rgba(234,88,12,0.10) !important; }
+        .dark .bg-yellow-50  { background-color: rgba(202,138,4,0.10) !important; }
+        .dark .bg-indigo-50  { background-color: rgba(67,56,202,0.10) !important; }
+        .dark .bg-blue-50    { background-color: rgba(37,99,235,0.10) !important; }
+        .dark .bg-blue-100   { background-color: rgba(37,99,235,0.18) !important; }
+        .dark .bg-cyan-50    { background-color: rgba(8,145,178,0.10) !important; }
+
+        /* Pill/chip */
+        .dark .bg-green-100  { background-color: rgba(22,163,74,0.20)  !important; }
+        .dark .bg-orange-100 { background-color: rgba(234,88,12,0.20)  !important; }
+        .dark .bg-red-100    { background-color: rgba(220,38,38,0.20)  !important; }
+        .dark .bg-yellow-100 { background-color: rgba(202,138,4,0.20)  !important; }
+
+        /* Text hierarchy */
+        .dark .text-gray-800 { color: #e2e8f0 !important; }
+        .dark .text-gray-700 { color: #cbd5e1 !important; }
+        .dark .text-gray-600 { color: #94a3b8 !important; }
+        .dark .text-gray-500 { color: #64748b !important; }
+        .dark .text-gray-400 { color: #475569 !important; }
+        .dark .text-gray-300 { color: #334155 !important; }
+
+        /* Badge text – keep vivid */
+        .dark .text-green-700  { color: #4ade80 !important; }
+        .dark .text-orange-700 { color: #fb923c !important; }
+        .dark .text-red-700    { color: #f87171 !important; }
+        .dark .text-yellow-700 { color: #fbbf24 !important; }
+        .dark .text-blue-700   { color: #93c5fd !important; }
+
+        /* Brand accent */
+        .dark .text-purple-600 { color: #c084fc !important; }
+        .dark .text-purple-500 { color: #c084fc !important; }
+        .dark .text-purple-400 { color: #d8b4fe !important; }
+        .dark .text-purple-700 { color: #d8b4fe !important; }
+        .dark .text-emerald-500 { color: #34d399 !important; }
+        .dark .text-blue-600 { color: #60a5fa !important; }
+        .dark .text-blue-500 { color: #60a5fa !important; }
+        .dark .text-cyan-500 { color: #22d3ee !important; }
+
+        /* Borders */
+        .dark .border-gray-100   { border-color: #1e1035 !important; }
+        .dark .border-gray-200   { border-color: #2a1a48 !important; }
+        .dark .border-gray-300   { border-color: #2a1a48 !important; }
+        .dark .border-purple-100 { border-color: rgba(147,51,234,0.3) !important; }
+        .dark .border-purple-200 { border-color: rgba(147,51,234,0.5) !important; }
+        .dark .border-blue-100   { border-color: rgba(59,130,246,0.3) !important; }
+        .dark .border-blue-200   { border-color: rgba(59,130,246,0.5) !important; }
+        .dark .border-yellow-200 { border-color: rgba(202,138,4,0.35) !important; }
+
+        /* Hover */
+        .dark .hover\:bg-gray-100:hover { background-color: #1c1030 !important; }
+        .dark .hover\:bg-gray-50:hover  { background-color: #100820 !important; }
+        .dark .hover\:border-purple-200:hover { border-color: rgba(147,51,234,0.5) !important; }
+        .dark .hover\:border-purple-400:hover { border-color: rgba(192,132,252,0.7) !important; }
+
+        /* Gradient stops */
+        .dark .from-purple-50  { --tw-gradient-from: #100820 !important; }
+        .dark .to-purple-50    { --tw-gradient-to:   #100820 !important; }
+        .dark .from-emerald-50 { --tw-gradient-from: #041208 !important; }
+        .dark .to-emerald-50   { --tw-gradient-to:   #041208 !important; }
+        .dark .from-slate-50   { --tw-gradient-from: #07030f !important; }
+        .dark .via-purple-50   { --tw-gradient-via:  #100820 !important; }
+
+        /* Marquee fades in dark mode */
+        .dark .marquee-fade-l { background: linear-gradient(to right, #100820, transparent) !important; }
+        .dark .marquee-fade-r { background: linear-gradient(to left,  #100820, transparent) !important; }
+
+        /* Inputs */
+        .dark input, .dark textarea, .dark select {
+            background-color: #100820 !important;
+            border-color: #1e1035 !important;
+            color: #e2e8f0 !important;
+        }
+        .dark input::placeholder, .dark textarea::placeholder { color: #475569 !important; }
+        .dark input:focus, .dark textarea:focus {
+            border-color: #a855f7 !important;
+            --tw-ring-color: rgba(168,85,247,0.3) !important;
+        }
+
+        /* Scrollbar */
+        .dark ::-webkit-scrollbar       { width: 5px; }
+        .dark ::-webkit-scrollbar-track { background: #07030f; }
+        .dark ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 3px; }
+
+        /* z-index layer above canvas */
+        nav, main { position: relative; z-index: 1; }
+    </style>
+</head>
+<body>
+    <canvas id="r3-rain"></canvas>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Inline SVG avatar – no external image needed
+        const AVATAR = `data:image/svg+xml;charset=utf-8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#a855f7"/><stop offset="100%" style="stop-color:#22c55e"/></linearGradient></defs><rect width="100" height="100" rx="20" fill="url(#g)"/><text x="50" y="68" font-family="monospace" font-size="42" font-weight="bold" fill="white" text-anchor="middle">r3</text></svg>')}`;
+
+        const Icon = ({ name, className = "w-6 h-6", ...props }) => {
+            const ref = useRef(null);
+            useEffect(() => {
+                if (ref.current && lucide[name]) {
+                    ref.current.innerHTML = '';
+                    ref.current.appendChild(lucide.createElement(lucide[name], { class: className }));
+                }
+            }, [name, className]);
+            return <i ref={ref} className={`flex-shrink-0 ${className}`} {...props}></i>;
+        };
+
+        const Portfolio = () => {
+            const [activePage, setActivePage] = useState('home');
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+            const [moreMenuOpen, setMoreMenuOpen] = useState(false);
+            const [darkMode, setDarkMode] = useState(() => {
+                const s = localStorage.getItem('darkMode');
+                return s !== null ? s === 'true' : true; // default dark
+            });
+
+            const [certifications, setCertifications] = useState([]);
+            const [certificationReviews, setCertificationReviews] = useState([]);
+            const [labsData, setLabsData] = useState([]);
+            const [skills, setSkills] = useState([]);
+            const [socialMedia, setSocialMedia] = useState([]);
+            const [achievements, setAchievements] = useState([]);
+            const [irReports, setIrReports] = useState([]);
+            const [researchData, setResearchData] = useState([]);
+
+            const labs = labsData;
+
+            useEffect(() => { localStorage.setItem('darkMode', darkMode); }, [darkMode]);
+            useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, [activePage]);
+
+            // Katakana rain
+            useEffect(() => {
+                const canvas = document.getElementById('r3-rain');
+                if (!canvas) return;
+                if (!darkMode) { canvas.style.display = 'none'; return; }
+                canvas.style.display = 'block';
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const ctx = canvas.getContext('2d');
+                const cols = Math.floor(canvas.width / 18);
+                const drops = Array.from({length: cols}, () => Math.floor(Math.random() * -80));
+                const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+                let animId;
+                const tick = () => {
+                    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.font = '13px monospace';
+                    drops.forEach((y, i) => {
+                        ctx.fillStyle = i % 2 === 0 ? '#a855f7' : '#22c55e';
+                        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 18, y);
+                        drops[i] += 18;
+                        if (drops[i] > canvas.height && Math.random() > 0.975) drops[i] = Math.floor(Math.random() * -160);
+                    });
+                    animId = requestAnimationFrame(tick);
+                };
+                tick();
+                return () => cancelAnimationFrame(animId);
+            }, [darkMode]);
+
+            useEffect(() => {
+                if (!moreMenuOpen) return;
+                const close = (e) => { if (!e.target.closest('.more-menu-root')) setMoreMenuOpen(false); };
+                document.addEventListener('click', close);
+                return () => document.removeEventListener('click', close);
+            }, [moreMenuOpen]);
+
+            useEffect(() => {
+                Promise.all([
+                    fetch('./data/certifications.json').then(r => r.json()),
+                    fetch('./data/reviews.json').then(r => r.json()),
+                    fetch('./data/labs.json').then(r => r.json()),
+                    fetch('./data/skills.json').then(r => r.json()),
+                    fetch('./data/social.json').then(r => r.json()),
+                    fetch('./data/achievements.json').then(r => r.json()),
+                    fetch('./data/ir-reports.json').then(r => r.json()),
+                    fetch('./data/research.json').then(r => r.json()),
+                ]).then(([certs, reviews, labsRaw, skillsData, social, achData, irData, research]) => {
+                    setCertifications(certs);
+                    setCertificationReviews(reviews);
+                    setLabsData(labsRaw);
+                    setSkills(skillsData);
+                    setSocialMedia(social);
+                    setAchievements(achData);
+                    setIrReports(irData);
+                    setResearchData(research);
+                }).catch(err => console.error('Failed to load data:', err));
+            }, []);
+
+            const navigation = [
+                { id: 'home',            label: 'Home',           icon: 'User' },
+                { id: 'certifications',  label: 'Certifications', icon: 'Award' },
+                { id: 'labs',            label: 'Labs & Projects',icon: 'Code' },
+                { id: 'achievements',    label: 'Achievements',   icon: 'Star' },
+                { id: 'stats',           label: 'Stats',          icon: 'BarChart2' },
+            ];
+
+            // ─────────────────────────────────────────────────────────────────
+            // HOME PAGE
+            // ─────────────────────────────────────────────────────────────────
+            const HomePage = () => (
+                <div className="space-y-10 animate-fadeIn">
+                    {/* Hero */}
+                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 via-purple-700 to-emerald-600 text-white shadow-2xl shadow-purple-200">
+                        <div className="hero-dots absolute inset-0" />
+                        <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/10 rounded-full blur-xl" />
+                        <div className="relative px-8 py-6 md:py-8 flex flex-col sm:flex-row sm:items-center gap-5">
+                            <div className="flex-shrink-0 flex justify-center sm:justify-start">
+                                <div className="relative">
+                                    <div className="absolute inset-0 rounded-2xl bg-white/30 animate-pulse-ring" />
+                                    <div className="relative bg-white/10 p-1 rounded-2xl border border-white/25">
+                                        <img src={AVATAR} alt="r3duan" className="w-16 h-16 rounded-xl" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex-1 text-center sm:text-left">
+                                <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight" style={{fontFamily:'Share Tech Mono, monospace'}}>r3duan</h1>
+                                <p className="text-purple-100 text-sm font-medium mt-0.5">Cloud &amp; Security Engineer · Blue Team · DFIR</p>
+                            </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full sm:w-auto">
+                                {[
+                                    { value: certifications.length, label: 'Certifications', icon: 'Award' },
+                                    { value: labs.filter(l => l.type === 'lab').length, label: 'Labs Built', icon: 'FlaskConical' },
+                                    { value: labs.filter(l => l.type === 'project').length, label: 'Projects', icon: 'FolderOpen' },
+                                    { value: certificationReviews.length, label: 'Reviews', icon: 'Star' },
+                                ].map((s, i) => (
+                                    <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 text-center">
+                                        <div className="text-2xl font-bold">{s.value}</div>
+                                        <div className="text-purple-200 text-xs font-medium mt-0.5 flex items-center justify-center gap-1">
+                                            <Icon name={s.icon} className="w-3 h-3" />{s.label}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Recently Added */}
+                    {(certifications.length > 0 || irReports.length > 0 || researchData.length > 0) && (
+                    <div>
+                        <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <span className="w-1 h-5 bg-gradient-to-b from-purple-500 to-emerald-400 rounded-full inline-block flex-shrink-0"></span>
+                            Recently Added
+                        </h2>
+                        <div className="grid sm:grid-cols-3 gap-4">
+                            {certifications.length > 0 && (() => {
+                                const cert = certifications.find(c => c.latest) || certifications[certifications.length - 1];
+                                return (
+                                    <a href={cert.url || '#'} target="_blank" rel="noopener noreferrer"
+                                        className="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:border-purple-200 hover:shadow-md transition-all group">
+                                        <div className="w-12 h-12 rounded-full ring-2 ring-green-200 bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+                                            <img src={cert.badge} alt={cert.name} className="w-10 h-10 object-contain group-hover:scale-110 transition-transform" />
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <span className="text-[10px] font-bold text-purple-500 uppercase tracking-widest">New Cert</span>
+                                            <p className="text-sm font-bold text-gray-800 group-hover:text-purple-700 transition-colors leading-snug truncate">{cert.name.split(' - ')[0]}</p>
+                                            <p className="text-xs text-gray-400 mt-0.5">{cert.issuer} · {cert.year}</p>
+                                        </div>
+                                        <Icon name="ExternalLink" className="w-3.5 h-3.5 text-gray-300 group-hover:text-purple-400 flex-shrink-0 transition-colors" />
+                                    </a>
+                                );
+                            })()}
+                            {irReports.length > 0 && (() => {
+                                const report = irReports[0];
+                                return (
+                                    <a href={report.url} className="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:border-red-200 hover:shadow-md transition-all group">
+                                        <div className="w-12 h-12 rounded-full ring-2 ring-red-100 bg-red-50 flex items-center justify-center flex-shrink-0">
+                                            <Icon name="FileText" className="w-5 h-5 text-red-500" />
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <span className="text-[10px] font-bold text-red-500 uppercase tracking-widest">Writeup</span>
+                                            <p className="text-sm font-bold text-gray-800 group-hover:text-red-700 transition-colors leading-snug truncate">{report.title}</p>
+                                            <p className="text-xs text-gray-400 mt-0.5">{report.platform} · {report.date}</p>
+                                        </div>
+                                        <Icon name="ArrowRight" className="w-3.5 h-3.5 text-gray-300 group-hover:text-red-400 flex-shrink-0 transition-colors" />
+                                    </a>
+                                );
+                            })()}
+                            {researchData.length > 0 && (() => {
+                                const article = researchData[0];
+                                return (
+                                    <a href={article.url} className="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:border-emerald-200 hover:shadow-md transition-all group">
+                                        <div className="w-12 h-12 rounded-full ring-2 ring-emerald-100 bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                                            <Icon name="ScrollText" className="w-5 h-5 text-emerald-600" />
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Research</span>
+                                            <p className="text-sm font-bold text-gray-800 group-hover:text-emerald-700 transition-colors leading-snug truncate">{article.title}</p>
+                                            <p className="text-xs text-gray-400 mt-0.5">{article.category} · {article.date}</p>
+                                        </div>
+                                        <Icon name="ArrowRight" className="w-3.5 h-3.5 text-gray-300 group-hover:text-emerald-400 flex-shrink-0 transition-colors" />
+                                    </a>
+                                );
+                            })()}
+                        </div>
+                    </div>
+                    )}
+
+                    {/* Badge Marquee */}
+                    <div>
+                        <h2 className="text-xl font-bold text-gray-800 mb-5 flex items-center gap-2">
+                            <span className="w-1 h-5 bg-gradient-to-b from-purple-500 to-emerald-400 rounded-full inline-block flex-shrink-0"></span>
+                            Earned Badges
+                        </h2>
+                        <div className="relative overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-sm py-5">
+                            <div className="marquee-fade-l absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none" />
+                            <div className="marquee-fade-r absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none" />
+                            <div className="badge-marquee-track">
+                                {[...certifications, ...certifications].map((cert, idx) => (
+                                    <a key={idx} href={cert.url || '#'} target="_blank" rel="noopener noreferrer"
+                                        className="flex-shrink-0 mx-4 flex flex-col items-center gap-2 group" title={cert.name}>
+                                        <div className={`w-16 h-16 rounded-full border-2 ${cert.status === 'Active' ? 'border-purple-200 group-hover:border-purple-400' : 'border-gray-200 group-hover:border-gray-400'} bg-gray-50 flex items-center justify-center overflow-hidden shadow-sm group-hover:shadow-md transition-all group-hover:scale-110`}>
+                                            <img src={cert.badge} alt={cert.name} className="w-12 h-12 object-contain" />
+                                        </div>
+                                        <span className="text-[10px] font-semibold text-gray-500 group-hover:text-purple-600 transition-colors max-w-[72px] text-center leading-tight truncate">{cert.name.split(' - ')[0].split(' — ')[0]}</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Skills */}
+                    <div>
+                        <h2 className="text-xl font-bold text-gray-800 mb-5 flex items-center gap-2">
+                            <span className="w-1 h-5 bg-gradient-to-b from-purple-500 to-emerald-400 rounded-full inline-block flex-shrink-0"></span>
+                            Skills &amp; Expertise
+                        </h2>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            {skills.map((sg, idx) => (
+                                <div key={idx} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all group">
+                                    <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2 uppercase tracking-wide">
+                                        <Icon name="Trophy" className="w-4 h-4 text-purple-500" />
+                                        {sg.category}
+                                    </h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {sg.items.map((skill, i) => (
+                                            <span key={i} className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm font-medium group-hover:bg-purple-100 transition-colors">
+                                                {skill}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* About Me */}
+                    <div className="bg-gradient-to-br from-purple-950 via-slate-900 to-emerald-950 rounded-3xl p-8 md:p-10 text-white shadow-xl">
+                        <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+                            <Icon name="User" className="w-5 h-5 text-purple-400" />
+                            About Me
+                        </h2>
+                        <p className="text-purple-100/90 leading-relaxed text-[15px]">
+                            Cloud &amp; Security Engineer based in Dhaka, Bangladesh. I run M365 tenant security, Entra ID identity governance,
+                            Microsoft Sentinel SIEM pipelines, and Defender XDR triage in production — then come home and pull apart DFIR
+                            challenges on TryHackMe and CyberDefenders. Eight certifications earned, CKA in progress, and always building
+                            something in a home lab. I believe the best defenders are people who understand how attackers think.
+                        </p>
+                        <div className="flex flex-wrap gap-3 mt-6">
+                            {[
+                                { label: 'TryHackMe',      icon: 'Target',  url: 'https://tryhackme.com/p/r3duan',                           color: 'hover:bg-red-500/20 hover:border-red-400/50' },
+                                { label: 'HackTheBox',     icon: 'Shield',  url: 'https://app.hackthebox.com/',                               color: 'hover:bg-green-500/20 hover:border-green-400/50' },
+                                { label: 'CyberDefenders', icon: 'Search',  url: 'https://cyberdefenders.org/',                               color: 'hover:bg-blue-500/20 hover:border-blue-400/50' },
+                            ].map((p, i) => (
+                                <a key={i} href={p.url} target="_blank" rel="noopener noreferrer"
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-xl border border-white/20 bg-white/10 text-white text-sm font-medium transition-all ${p.color}`}>
+                                    <Icon name={p.icon} className="w-4 h-4" />
+                                    {p.label}
+                                    <Icon name="ExternalLink" className="w-3 h-3 opacity-60" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Connect */}
+                    <div className="space-y-6">
+                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <span className="w-1 h-5 bg-gradient-to-b from-purple-500 to-emerald-400 rounded-full inline-block flex-shrink-0"></span>
+                            Connect
+                        </h2>
+                        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                            {socialMedia.map((social, idx) => (
+                                <a key={idx} href={social.url} target="_blank" rel="noopener noreferrer"
+                                    className="bg-white rounded-lg p-6 shadow-lg border-2 border-gray-100 hover:border-purple-400 hover:shadow-xl transition-all group">
+                                    <div className="flex items-center gap-4">
+                                        <div className="bg-purple-50 p-4 rounded-full group-hover:bg-purple-100 transition-colors">
+                                            {social.svg
+                                                ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-purple-600"><path d={social.svg} /></svg>
+                                                : <Icon name={social.icon} className="w-8 h-8 text-purple-600" />
+                                            }
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="text-xl font-bold text-gray-800 mb-1">{social.platform}</h3>
+                                            <p className="text-gray-600">{social.handle}</p>
+                                        </div>
+                                        <Icon name="ExternalLink" className="w-5 h-5 text-gray-400 group-hover:text-purple-600" />
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+
+                        <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-emerald-600 rounded-lg p-8 text-white text-center max-w-2xl mx-auto">
+                            <h3 className="text-2xl font-bold mb-3">Open to Collaboration</h3>
+                            <p className="mb-4">
+                                Interested in cloud security projects, blue team tooling, or detection engineering? 
+                                Let's connect — always happy to talk shop with fellow security engineers!
+                            </p>
+                            <div className="flex justify-center gap-4">
+                                <a href="mailto:reduan7701@gmail.com" className="bg-white text-purple-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+                                    Send Email
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="text-center text-gray-500 text-sm">
+                            <p>&copy; 2026 r3duan. Built with React · Deployed on GitHub Pages · <span style={{fontFamily:'Share Tech Mono, monospace'}}>0xr3duan.me</span></p>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            // ─────────────────────────────────────────────────────────────────
+            // CERTIFICATIONS PAGE
+            // ─────────────────────────────────────────────────────────────────
+            const CertificationsPage = () => {
+                const [certView, setCertView] = useState('badges');
+                const categoryOrder = ['Offensive Security', 'Blue Team & Detection', 'Cloud Security', 'General & Foundational'];
+                const categoryConfig = {
+                    'Offensive Security':    { icon: 'Target',   gradient: 'from-red-500 to-orange-500',    border: 'border-red-100',    headerBg: 'bg-red-50',    countColor: 'text-red-600 bg-red-100' },
+                    'Blue Team & Detection': { icon: 'Shield',   gradient: 'from-blue-500 to-cyan-500',     border: 'border-blue-100',   headerBg: 'bg-blue-50',   countColor: 'text-blue-600 bg-blue-100' },
+                    'Cloud Security':        { icon: 'Cloud',    gradient: 'from-purple-500 to-fuchsia-500', border: 'border-purple-100', headerBg: 'bg-purple-50', countColor: 'text-purple-600 bg-purple-100' },
+                    'General & Foundational':{ icon: 'BookOpen', gradient: 'from-green-500 to-emerald-500', border: 'border-green-100',  headerBg: 'bg-green-50',  countColor: 'text-green-600 bg-green-100' },
+                };
+                const [openCats, setOpenCats] = useState({'Offensive Security':true,'Blue Team & Detection':true,'Cloud Security':true,'General & Foundational':true});
+                const toggleCat = (cat) => setOpenCats(p => ({...p, [cat]: !p[cat]}));
+                const allOpen = Object.values(openCats).every(Boolean);
+                const toggleAll = () => setOpenCats(Object.fromEntries(categoryOrder.map(c => [c, !allOpen])));
+                const certsByCategory = categoryOrder.reduce((acc, cat) => { acc[cat] = certifications.filter(c => c.category === cat); return acc; }, {});
+                const activeCerts = certifications.filter(c => c.status === 'Active').length;
+                const expiredCerts = certifications.filter(c => c.status !== 'Active').length;
+
+                return (
+                <div className="space-y-6 animate-fadeIn">
+                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-700 via-purple-800 to-slate-900 text-white shadow-xl p-7">
+                        <div className="hero-dots absolute inset-0" />
+                        <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
+                        <div className="relative">
+                            <div className="flex items-center gap-3 mb-5">
+                                <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                                    <Icon name="Award" className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                    <h1 className="text-2xl font-extrabold leading-tight">Professional Certifications</h1>
+                                    <p className="text-purple-200 text-sm mt-0.5">Validated expertise across offensive &amp; defensive security</p>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                {[
+                                    { value: certifications.length, label: 'Total', icon: 'Award' },
+                                    { value: activeCerts,           label: 'Active', icon: 'CheckCircle' },
+                                    { value: expiredCerts,          label: 'Expired', icon: 'Clock' },
+                                    { value: categoryOrder.length,  label: 'Domains', icon: 'Layers' },
+                                ].map((s, i) => (
+                                    <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20">
+                                        <div className="text-2xl font-bold">{s.value}</div>
+                                        <div className="text-purple-200 text-xs font-medium mt-0.5 flex items-center gap-1">
+                                            <Icon name={s.icon} className="w-3 h-3" />{s.label}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                        <div className="flex gap-1 p-1 bg-gray-100 rounded-xl">
+                            {[{id:'badges',label:'Badges',icon:'Award'},{id:'certificates',label:'Certificates',icon:'FileText'}].map(tab => (
+                                <button key={tab.id} onClick={() => setCertView(tab.id)}
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${certView===tab.id?'bg-white text-purple-600 shadow-sm':'text-gray-500 hover:text-gray-700'}`}>
+                                    <Icon name={tab.icon} className="w-4 h-4" />{tab.label}
+                                </button>
+                            ))}
+                        </div>
+                        <button onClick={toggleAll}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-600 bg-white border border-gray-200 hover:border-purple-300 hover:text-purple-600 shadow-sm transition-all">
+                            <Icon name={allOpen?'ChevronsUp':'ChevronsDown'} className="w-4 h-4" />
+                            {allOpen ? 'Collapse All' : 'Expand All'}
+                        </button>
+                    </div>
+
+                    <div className="space-y-4">
+                        {categoryOrder.map(cat => {
+                            const certs = certsByCategory[cat];
+                            if (!certs || !certs.length) return null;
+                            const cfg = categoryConfig[cat];
+                            const isOpen = openCats[cat];
+                            return (
+                                <div key={cat} className={`rounded-2xl border ${cfg.border} overflow-hidden shadow-sm`}>
+                                    <button onClick={() => toggleCat(cat)}
+                                        className={`w-full flex items-center gap-3 px-5 py-4 ${cfg.headerBg} hover:brightness-[0.97] transition-all`}>
+                                        <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${cfg.gradient} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                                            <Icon name={cfg.icon} className="w-5 h-5 text-white" />
+                                        </div>
+                                        <span className="flex-1 text-left font-bold text-gray-800 text-[15px]">{cat}</span>
+                                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${cfg.countColor}`}>{certs.length} certs</span>
+                                        <Icon name={isOpen?'ChevronUp':'ChevronDown'} className="w-4 h-4 text-gray-400 ml-1" />
+                                    </button>
+                                    {isOpen && certView === 'badges' && (
+                                        <div className="grid md:grid-cols-2 gap-3 p-4 bg-white border-t border-gray-100">
+                                            {certs.map((cert, idx) => (
+                                                <a key={idx} href={cert.url || '#'} target="_blank" rel="noopener noreferrer"
+                                                    className="flex items-center gap-4 p-3.5 rounded-xl border border-gray-100 hover:border-purple-200 hover:shadow-md bg-white hover:bg-purple-50/30 transition-all group">
+                                                    <div className={`w-14 h-14 rounded-full flex-shrink-0 ring-2 ${cert.status==='Active'?'ring-green-200 group-hover:ring-purple-300':'ring-gray-200'} bg-gray-50 flex items-center justify-center overflow-hidden`}>
+                                                        <img src={cert.badge} alt={cert.name} className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300" />
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <p className="text-sm font-bold text-gray-800 group-hover:text-purple-700 transition-colors leading-snug">{cert.name}</p>
+                                                        <p className="text-xs text-purple-600 font-medium mt-0.5">{cert.issuer}</p>
+                                                        <div className="flex items-center gap-2 mt-1.5">
+                                                            <span className="text-[11px] text-gray-400 flex items-center gap-0.5"><Icon name="Calendar" className="w-3 h-3" />{cert.year}</span>
+                                                            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full ${cert.status==='Active'?'bg-green-100 text-green-700':'bg-gray-100 text-gray-500'}`}>{cert.status}</span>
+                                                        </div>
+                                                    </div>
+                                                    <Icon name="ExternalLink" className="w-3.5 h-3.5 text-gray-300 group-hover:text-purple-400 flex-shrink-0 transition-colors" />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
+                                    {isOpen && certView === 'certificates' && (
+                                        <div className="grid md:grid-cols-2 gap-3 p-4 bg-white border-t border-gray-100">
+                                            {certs.map((cert, idx) => (
+                                                <div key={idx} className="rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-all group bg-white">
+                                                    {cert.certificate ? (
+                                                        <a href={cert.certificate} target="_blank" rel="noopener noreferrer" className="block w-full h-44 bg-gray-50 overflow-hidden">
+                                                            <img src={cert.certificate} alt={`${cert.name} certificate`} className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-300" />
+                                                        </a>
+                                                    ) : (
+                                                        <div className="w-full h-44 bg-gray-50 flex flex-col items-center justify-center gap-2 text-gray-300">
+                                                            <Icon name="ImageOff" className="w-8 h-8" />
+                                                            <span className="text-xs font-medium">Not yet available</span>
+                                                        </div>
+                                                    )}
+                                                    <div className="px-4 py-3 flex items-center gap-3 border-t border-gray-100">
+                                                        <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 overflow-hidden ring-1 ring-gray-200">
+                                                            <img src={cert.badge} alt={cert.name} className="w-7 h-7 object-contain" />
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-xs font-bold text-gray-800 truncate">{cert.name}</p>
+                                                            <p className="text-[11px] text-gray-400 mt-0.5">{cert.issuer} · {cert.year}</p>
+                                                        </div>
+                                                        <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full flex-shrink-0 ${cert.status==='Active'?'bg-green-100 text-green-700':'bg-gray-100 text-gray-500'}`}>{cert.status}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="bg-gradient-to-br from-purple-50 to-emerald-50 rounded-2xl p-6 border border-purple-100 flex gap-4 items-start">
+                        <div className="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center flex-shrink-0">
+                            <Icon name="TrendingUp" className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-gray-800 mb-1">Always Learning</h3>
+                            <p className="text-gray-600 text-sm leading-relaxed">
+                                Continuously expanding through TryHackMe, CyberDefenders, Blue Team Labs Online, and HackTheBox.
+                                Currently pursuing CKA and planning advanced cloud security certifications in threat hunting and detection engineering.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                );
+            };
+
+            // ─────────────────────────────────────────────────────────────────
+            // LABS PAGE
+            // ─────────────────────────────────────────────────────────────────
+            const LabsPage = () => {
+                const [activeTab, setActiveTab] = useState('labs');
+                const [selectedPlatform, setSelectedPlatform] = useState('All');
+                const [selectedProjCat, setSelectedProjCat] = useState('All');
+                const [labSearch, setLabSearch] = useState('');
+                const [labDiff, setLabDiff] = useState('All');
+                const [labSort, setLabSort] = useState('default');
+                const [projSearch, setProjSearch] = useState('');
+
+                const renderStars = (rating) => {
+                    if (!rating) return null;
+                    const full = Math.floor(rating), half = rating % 1 >= 0.5;
+                    return <span className="text-yellow-500 text-lg inline-flex items-center"><span>{'★'.repeat(full)}</span>{half && <span style={{opacity:0.5}}>★</span>}<span>{'☆'.repeat(5-full-(half?1:0))}</span></span>;
+                };
+
+                const diffColors = { easy:'bg-green-100 text-green-700', medium:'bg-orange-100 text-orange-700', hard:'bg-red-100 text-red-700' };
+                const getProjCat = (p) => { if (p.tags && p.tags.includes('Tool')) return 'Tool'; if (p.platform==='Medium'||p.platform==='Original') return 'Blog'; return 'Misc'; };
+
+                const labsOnly = labs.filter(l => l.type === 'lab');
+                const projectsOnly = labs.filter(l => l.type === 'project');
+                const platforms = ['All', ...Array.from(new Set(labsOnly.map(l => l.platform)))];
+                const projCats = ['All', 'Tool', 'Misc', 'Blog'];
+
+                const filteredLabs = (() => {
+                    let list = labsOnly;
+                    if (selectedPlatform !== 'All') list = list.filter(l => l.platform === selectedPlatform);
+                    if (labDiff !== 'All') list = list.filter(l => l.difficulty === labDiff.toLowerCase());
+                    if (labSearch.trim()) { const q = labSearch.toLowerCase(); list = list.filter(l => l.title.toLowerCase().includes(q)||(l.tags||[]).some(t=>t.toLowerCase().includes(q))); }
+                    if (labSort === 'rating') list = [...list].sort((a,b) => (b.rating||0)-(a.rating||0));
+                    if (labSort === 'difficulty') { const ord={easy:0,medium:1,hard:2}; list=[...list].sort((a,b)=>(ord[a.difficulty]??9)-(ord[b.difficulty]??9)); }
+                    return list;
+                })();
+                const filteredProjs = (() => {
+                    let list = selectedProjCat==='All' ? projectsOnly : projectsOnly.filter(p=>getProjCat(p)===selectedProjCat);
+                    if (projSearch.trim()) { const q=projSearch.toLowerCase(); list=list.filter(p=>p.title.toLowerCase().includes(q)||p.description.toLowerCase().includes(q)||(p.tags||[]).some(t=>t.toLowerCase().includes(q))); }
+                    return list;
+                })();
+
+                const LabCard = ({lab}) => (
+                    <div className={`bg-white rounded-2xl p-5 shadow-sm border transition-all hover:shadow-md ${lab.is_retired?'border-orange-100 hover:border-orange-300':'border-gray-100 hover:border-purple-200'}`}>
+                        <div className="flex flex-col md:flex-row gap-6">
+                            {lab.image && (
+                                <div className="flex-shrink-0 w-full md:w-48 relative">
+                                    <img src={lab.image} alt={lab.title} className="rounded-lg object-cover w-full h-auto shadow-md" />
+                                    {lab.is_retired && <span className="absolute top-2 left-2 px-2 py-0.5 bg-orange-500 text-white rounded text-xs font-bold shadow">Retired</span>}
+                                </div>
+                            )}
+                            <div className="flex-1">
+                                <div className="flex items-start justify-between mb-2">
+                                    <h3 className="text-xl font-bold text-gray-800 leading-tight">{lab.title}</h3>
+                                    {lab.difficulty && <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase flex-shrink-0 ml-3 ${diffColors[lab.difficulty]}`}>{lab.difficulty}</span>}
+                                </div>
+                                {lab.rating && <div className="flex items-center gap-1.5 mb-2">{renderStars(lab.rating)}<span className="text-sm font-semibold text-gray-700">{lab.rating.toFixed(1)}</span></div>}
+                                <p className="text-gray-600 mb-4">{lab.description}</p>
+                                <div className="flex flex-wrap gap-2 mb-3">
+                                    {(lab.tags||[]).map((tag,i) => <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">{tag}</span>)}
+                                </div>
+                                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                                    <span className="text-sm font-medium text-gray-500">{lab.platform}</span>
+                                    <a href={lab.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-medium text-emerald-600 hover:text-emerald-700">
+                                        Play Now <Icon name="ExternalLink" className="w-4 h-4 self-center" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+
+                const ProjectCard = ({project}) => {
+                    const cat = getProjCat(project);
+                    const cs = {Tool:'bg-purple-100 text-purple-700',Misc:'bg-blue-100 text-blue-700',Blog:'bg-emerald-100 text-emerald-700'}[cat];
+                    return (
+                        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all">
+                            <div className="flex flex-col md:flex-row gap-6">
+                                {project.image && <div className="flex-shrink-0 w-full md:w-64"><img src={project.image} alt={project.title} className="rounded-lg object-cover w-full h-auto shadow-md" /></div>}
+                                <div className="flex-1">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <h3 className="text-xl font-bold text-gray-800">{project.title}</h3>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase flex-shrink-0 ml-2 ${cs}`}>{cat}</span>
+                                    </div>
+                                    <p className="text-gray-600 mb-4">{project.description}</p>
+                                    <div className="flex flex-wrap gap-2 mb-3">
+                                        {(project.tags||[]).map((tag,i) => <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">{tag}</span>)}
+                                    </div>
+                                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                                        <span className="text-sm font-medium text-gray-500">{project.platform}</span>
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 font-medium text-purple-600 hover:text-purple-700">
+                                            View Project <Icon name="ExternalLink" className="w-4 h-4 self-center" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                };
+
+                const FilterPills = ({options, selected, onSelect, counts}) => (
+                    <div className="flex flex-wrap gap-2 items-center">
+                        <Icon name="Filter" className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                        {options.map(opt => (
+                            <button key={opt} onClick={()=>onSelect(opt)}
+                                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border-2 ${selected===opt?'bg-purple-600 text-white border-purple-600':'bg-white text-gray-600 border-gray-200 hover:border-purple-400 hover:text-purple-600'}`}>
+                                {opt}{opt!=='All'&&counts&&` (${counts[opt]||0})`}
+                            </button>
+                        ))}
+                    </div>
+                );
+
+                const platformCounts = Object.fromEntries(platforms.slice(1).map(p=>[p,labsOnly.filter(l=>l.platform===p).length]));
+                const projCatCounts = Object.fromEntries(projCats.slice(1).map(c=>[c,projectsOnly.filter(p=>getProjCat(p)===c).length]));
+
+                return (
+                <div className="space-y-6 animate-fadeIn">
+                    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-700 via-purple-600 to-emerald-700 text-white shadow-2xl p-7 md:p-10">
+                        <div className="absolute inset-0" style={{backgroundImage:'radial-gradient(circle, rgba(255,255,255,0.10) 1px, transparent 1px)',backgroundSize:'24px 24px'}} />
+                        <div className="absolute -top-12 -right-12 w-56 h-56 bg-white/10 rounded-full blur-2xl" />
+                        <div className="relative flex flex-col sm:flex-row sm:items-center gap-4 mb-5">
+                            <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                                <Icon name="FlaskConical" className="w-6 h-6 text-white" />
+                            </div>
+                            <div>
+                                <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Labs &amp; Projects</h1>
+                                <p className="text-purple-200 mt-0.5 text-sm">Hands-on security scenarios and tools I've built or studied</p>
+                            </div>
+                        </div>
+                        <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            {[
+                                {value:labsOnly.length,label:'Labs',icon:'FlaskConical'},
+                                {value:projectsOnly.length,label:'Projects',icon:'FolderOpen'},
+                                {value:[...new Set(labsOnly.map(l=>l.platform))].length,label:'Platforms',icon:'Globe'},
+                                {value:labsOnly.filter(l=>l.is_retired).length,label:'Retired',icon:'Archive'},
+                            ].map((s,i)=>(
+                                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20">
+                                    <div className="text-2xl font-bold">{s.value}</div>
+                                    <div className="text-purple-200 text-xs font-medium mt-0.5 flex items-center gap-1"><Icon name={s.icon} className="w-3 h-3"/>{s.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="flex gap-1 p-1 bg-gray-100 rounded-xl w-fit">
+                        {[{id:'labs',label:'Labs',count:labsOnly.length,icon:'FlaskConical'},{id:'projects',label:'Projects',count:projectsOnly.length,icon:'FolderOpen'}].map(tab=>(
+                            <button key={tab.id} onClick={()=>setActiveTab(tab.id)}
+                                className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-semibold transition-all ${activeTab===tab.id?'bg-white text-purple-600 shadow-sm':'text-gray-500 hover:text-gray-700'}`}>
+                                <Icon name={tab.icon} className="w-4 h-4"/>
+                                {tab.label}
+                                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${activeTab===tab.id?'bg-purple-100 text-purple-600':'bg-gray-200 text-gray-500'}`}>{tab.count}</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {activeTab==='labs' && (
+                    <div className="space-y-4">
+                        <div className="flex flex-col sm:flex-row gap-3">
+                            <div className="relative flex-1">
+                                <Icon name="Search" className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"/>
+                                <input type="text" placeholder="Search labs by name or tag…" value={labSearch} onChange={e=>setLabSearch(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 bg-white text-gray-800" />
+                            </div>
+                            <select value={labSort} onChange={e=>setLabSort(e.target.value)}
+                                className="px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-purple-300 cursor-pointer">
+                                <option value="default">Sort: Default</option>
+                                <option value="rating">Sort: Highest Rated</option>
+                                <option value="difficulty">Sort: Easiest First</option>
+                            </select>
+                        </div>
+                        <FilterPills options={platforms} selected={selectedPlatform} onSelect={setSelectedPlatform} counts={platformCounts}/>
+                        <div className="flex flex-wrap gap-2 items-center">
+                            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Difficulty:</span>
+                            {['All','Easy','Medium','Hard'].map(d=>(
+                                <button key={d} onClick={()=>setLabDiff(d)}
+                                    className={`px-3 py-1 rounded-full text-xs font-semibold border transition-all ${labDiff===d?(d==='All'?'bg-gray-700 text-white border-gray-700':d==='Easy'?'bg-green-500 text-white border-green-500':d==='Medium'?'bg-orange-500 text-white border-orange-500':'bg-red-500 text-white border-red-500'):'bg-white text-gray-600 border-gray-200 hover:border-gray-400'}`}>
+                                    {d}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                            Showing <span className="font-semibold text-gray-700">{filteredLabs.length}</span> of <span className="font-semibold text-gray-700">{labsOnly.length}</span> labs
+                            {(labSearch||labDiff!=='All'||selectedPlatform!=='All') && <button onClick={()=>{setLabSearch('');setLabDiff('All');setSelectedPlatform('All');}} className="ml-3 text-xs text-purple-500 hover:text-purple-700 font-medium underline">Clear filters</button>}
+                        </div>
+                        <div className="grid gap-5">
+                            {filteredLabs.length===0 ? (
+                                <div className="text-center py-16 text-gray-400"><Icon name="SearchX" className="w-10 h-10 mx-auto mb-3 opacity-30"/><p className="font-semibold text-gray-500">No labs match your filters</p></div>
+                            ) : filteredLabs.map((lab,idx)=><LabCard key={idx} lab={lab}/>)}
+                        </div>
+                    </div>
+                    )}
+
+                    {activeTab==='projects' && (
+                    <div className="space-y-4">
+                        <div className="relative">
+                            <Icon name="Search" className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"/>
+                            <input type="text" placeholder="Search projects…" value={projSearch} onChange={e=>setProjSearch(e.target.value)}
+                                className="w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 bg-white text-gray-800"/>
+                        </div>
+                        <FilterPills options={projCats} selected={selectedProjCat} onSelect={setSelectedProjCat} counts={projCatCounts}/>
+                        <div className="text-sm text-gray-500">Showing <span className="font-semibold text-gray-700">{filteredProjs.length}</span> of <span className="font-semibold text-gray-700">{projectsOnly.length}</span> projects</div>
+                        <div className="grid gap-5">
+                            {filteredProjs.length===0 ? (
+                                <div className="text-center py-16 text-gray-400"><Icon name="SearchX" className="w-10 h-10 mx-auto mb-3 opacity-30"/><p className="font-semibold text-gray-500">No projects match your search</p></div>
+                            ) : filteredProjs.map((proj,idx)=><ProjectCard key={idx} project={proj}/>)}
+                        </div>
+                    </div>
+                    )}
+
+                    <div className="bg-gradient-to-br from-purple-50 to-emerald-50 rounded-2xl p-6 text-center border border-purple-100">
+                        <h3 className="font-bold text-gray-800 mb-2">More Coming Soon!</h3>
+                        <p className="text-gray-600 text-sm">Follow me on GitHub to stay updated on new labs and writeups.</p>
+                    </div>
+                </div>
+                );
+            };
+
+            // ─────────────────────────────────────────────────────────────────
+            // ACHIEVEMENTS PAGE — Career milestones timeline
+            // ─────────────────────────────────────────────────────────────────
+            const AchievementsPage = () => {
+                const milestones = achievements;
+                const byYear = milestones.reduce((acc, a) => { (acc[a.year]=acc[a.year]||[]).push(a); return acc; }, {});
+                const years = Object.keys(byYear).sort((a,b)=>b-a);
+
+                const typeIcon = (t) => {
+                    if (!t) return 'Star';
+                    const tl = t.toLowerCase();
+                    if (tl.includes('career')||tl.includes('current')) return 'Briefcase';
+                    if (tl.includes('intern')) return 'GraduationCap';
+                    if (tl.includes('degree')) return 'BookOpen';
+                    if (tl.includes('cert')) return 'Award';
+                    return 'Star';
+                };
+                const typeColor = (t) => {
+                    if (!t) return 'from-purple-500 to-purple-600';
+                    const tl = t.toLowerCase();
+                    if (tl.includes('career')||tl.includes('current')) return 'from-purple-600 to-purple-700';
+                    if (tl.includes('intern')) return 'from-emerald-500 to-emerald-600';
+                    if (tl.includes('degree')) return 'from-blue-500 to-blue-600';
+                    if (tl.includes('cert')) return 'from-yellow-500 to-amber-600';
+                    return 'from-purple-500 to-purple-600';
+                };
+                const placementStyle = (p) => {
+                    if (!p) return 'bg-gray-100 text-gray-500 border-gray-200';
+                    const pl = p.toLowerCase();
+                    if (pl.includes('current')) return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    if (pl.includes('1st')||pl.includes('first')||pl.includes('winner')) return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+                    if (pl.includes('cgpa')||pl.includes('completed')) return 'bg-purple-50 text-purple-700 border-purple-200';
+                    return 'bg-gray-100 text-gray-500 border-gray-200';
+                };
+
+                return (
+                <div className="space-y-8 animate-fadeIn">
+                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-700 via-purple-800 to-slate-900 text-white shadow-xl p-7">
+                        <div className="hero-dots absolute inset-0" />
+                        <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
+                        <div className="relative">
+                            <div className="flex items-center gap-3 mb-5">
+                                <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                                    <Icon name="Star" className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                    <h1 className="text-2xl font-extrabold leading-tight">Achievements</h1>
+                                    <p className="text-purple-200 text-sm mt-0.5">Career milestones, internships, and notable wins</p>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-3 gap-3">
+                                {[
+                                    {label:'Milestones',value:milestones.length,icon:'Star'},
+                                    {label:'Organizations',value:[...new Set(milestones.map(m=>m.organizer))].length,icon:'Building2'},
+                                    {label:'Years Active',value:years.length,icon:'Calendar'},
+                                ].map(s=>(
+                                    <div key={s.label} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20">
+                                        <div className="text-2xl font-bold">{s.value}</div>
+                                        <div className="text-purple-200 text-xs font-medium mt-0.5 flex items-center gap-1"><Icon name={s.icon} className="w-3 h-3"/>{s.label}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {years.map(year => (
+                        <div key={year}>
+                            <div className="flex items-center gap-3 mb-5">
+                                <span className="text-sm font-bold text-gray-400 uppercase tracking-widest">{year}</span>
+                                <div className="flex-1 h-px bg-gradient-to-r from-purple-200 to-transparent" />
+                                <span className="text-xs text-gray-400">{byYear[year].length} milestone{byYear[year].length!==1?'s':''}</span>
+                            </div>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                {byYear[year].map((item, idx) => (
+                                    <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg hover:border-purple-200 transition-all group">
+                                        <div className="w-full h-40 bg-gradient-to-br from-slate-900 to-purple-950 flex items-center justify-center relative overflow-hidden">
+                                            <div className="hero-dots absolute inset-0 opacity-40"/>
+                                            <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${typeColor(item.type)} flex items-center justify-center shadow-xl`}>
+                                                <Icon name={typeIcon(item.type)} className="w-8 h-8 text-white"/>
+                                            </div>
+                                            {item.type && (
+                                                <span className="absolute top-3 left-3 px-2 py-0.5 bg-black/50 text-white rounded-md text-xs font-semibold backdrop-blur-sm">{item.type}</span>
+                                            )}
+                                        </div>
+                                        <div className="p-4 space-y-2.5">
+                                            <div className="flex items-start justify-between gap-2">
+                                                <h3 className="font-bold text-gray-800 text-sm leading-snug group-hover:text-purple-600 transition-colors">{item.name}</h3>
+                                                {item.placement && (
+                                                    <span className={`flex-shrink-0 px-2 py-0.5 rounded-full text-xs font-semibold border ${placementStyle(item.placement)}`}>{item.placement}</span>
+                                                )}
+                                            </div>
+                                            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500">
+                                                <span className="font-medium text-purple-600 flex items-center gap-1"><Icon name="Building2" className="w-3 h-3"/>{item.organizer}</span>
+                                                <span>·</span>
+                                                <span className="flex items-center gap-1"><Icon name="Calendar" className="w-3 h-3"/>{item.year}</span>
+                                            </div>
+                                            {item.description && <p className="text-xs text-gray-500 leading-relaxed">{item.description}</p>}
+                                            {(item.tags||[]).length>0 && (
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {item.tags.map((tag,i)=><span key={i} className="px-2 py-0.5 bg-purple-50 text-purple-600 rounded-md text-xs font-medium border border-purple-100">{tag}</span>)}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                );
+            };
+
+            // ─────────────────────────────────────────────────────────────────
+            // STATS PAGE
+            // ─────────────────────────────────────────────────────────────────
+            const StatsPage = () => {
+                const [showByIssuer, setShowByIssuer] = useState(true);
+                const [showByCat, setShowByCat] = useState(true);
+                const [showByYear, setShowByYear] = useState(true);
+                const [showByPlatform, setShowByPlatform] = useState(true);
+
+                const activeCerts = certifications.filter(c=>c.status==='Active').length;
+                const expiredCerts = certifications.filter(c=>c.status==='Expired').length;
+                const labsOnly = labs.filter(l=>l.type==='lab');
+                const projects = labs.filter(l=>l.type==='project');
+
+                const certsByIssuer = certifications.reduce((acc,c)=>{acc[c.issuer]=(acc[c.issuer]||0)+1;return acc;},{});
+                const sortedIssuers = Object.entries(certsByIssuer).sort((a,b)=>b[1]-a[1]);
+                const maxIssuer = sortedIssuers[0]?.[1]||1;
+
+                const catOrder = ['Offensive Security','Blue Team & Detection','Cloud Security','General & Foundational'];
+                const catColors = {
+                    'Offensive Security':    {bar:'bg-gradient-to-r from-red-400 to-orange-500',   dot:'bg-red-500'},
+                    'Blue Team & Detection': {bar:'bg-gradient-to-r from-blue-400 to-cyan-500',    dot:'bg-blue-500'},
+                    'Cloud Security':        {bar:'bg-gradient-to-r from-purple-400 to-fuchsia-500',dot:'bg-purple-500'},
+                    'General & Foundational':{bar:'bg-gradient-to-r from-green-400 to-emerald-500',dot:'bg-green-500'},
+                };
+                const certsByCat = catOrder.map(cat=>({label:cat,count:certifications.filter(c=>c.category===cat).length}));
+                const maxCat = Math.max(...certsByCat.map(c=>c.count),1);
+
+                const certsByYear = certifications.reduce((acc,c)=>{if(c.year)acc[c.year]=(acc[c.year]||0)+1;return acc;},{});
+                const sortedYears = Object.entries(certsByYear).sort((a,b)=>a[0]-b[0]);
+                const maxYear = sortedYears.length ? Math.max(...sortedYears.map(([,v])=>v),1) : 1;
+
+                const labsByPlatform = labs.reduce((acc,l)=>{acc[l.platform]=(acc[l.platform]||0)+1;return acc;},{});
+                const sortedPlatforms = Object.entries(labsByPlatform).sort((a,b)=>b[1]-a[1]);
+                const maxPlatform = sortedPlatforms[0]?.[1]||1;
+
+                const StatCard = ({icon,value,label,sub,color='purple'}) => {
+                    const cols = {purple:'from-purple-500 to-purple-600',emerald:'from-emerald-500 to-emerald-600',blue:'from-blue-500 to-blue-600',yellow:'from-yellow-500 to-amber-500'};
+                    return (
+                        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition-all flex items-center gap-3">
+                            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${cols[color]} flex-shrink-0`}>
+                                <Icon name={icon} className="w-5 h-5 text-white"/>
+                            </div>
+                            <div className="min-w-0">
+                                <div className="text-2xl font-bold text-gray-800 leading-tight">{value}</div>
+                                <div className="text-sm font-semibold text-gray-700 leading-tight">{label}</div>
+                                {sub && <div className="text-xs text-gray-500 mt-0.5 truncate">{sub}</div>}
+                            </div>
+                        </div>
+                    );
+                };
+
+                const BarRow = ({label,count,max,colorClass,pct}) => (
+                    <div className="flex items-center gap-3 py-1">
+                        <span className="text-sm text-gray-700 w-28 flex-shrink-0 truncate" title={label}>{label}</span>
+                        <div className="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden">
+                            <div className={`h-4 rounded-full transition-all ${colorClass}`} style={{width:`${Math.round((count/max)*100)}%`}}/>
+                        </div>
+                        <span className="text-sm font-bold text-gray-700 w-6 text-right">{count}</span>
+                        {pct!==undefined && <span className="text-xs text-gray-400 w-9 text-right">{pct}%</span>}
+                    </div>
+                );
+
+                const SectionToggle = ({title,icon,iconColor,show,onToggle}) => (
+                    <button onClick={onToggle} className="w-full flex items-center justify-between group">
+                        <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <Icon name={icon} className={`w-5 h-5 ${iconColor}`}/>
+                            {title}
+                        </h2>
+                        <span className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${show?'bg-purple-100 text-purple-600':'bg-gray-100 text-gray-500 group-hover:bg-gray-200'}`}>
+                            {show?'Hide':'Show'}
+                        </span>
+                    </button>
+                );
+
+                return (
+                <div className="space-y-8 animate-fadeIn">
+                    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-700 via-purple-800 to-slate-900 text-white shadow-xl p-7">
+                        <div className="hero-dots absolute inset-0"/>
+                        <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl"/>
+                        <div className="relative flex items-center gap-3">
+                            <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                                <Icon name="BarChart2" className="w-6 h-6 text-white"/>
+                            </div>
+                            <div>
+                                <h1 className="text-2xl font-extrabold leading-tight">Portfolio Stats</h1>
+                                <p className="text-purple-200 text-sm mt-0.5">A snapshot of my cybersecurity journey by the numbers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <StatCard icon="Award" value={certifications.length} label="Certifications" sub={`${activeCerts} active · ${expiredCerts} expired`} color="purple"/>
+                        <StatCard icon="FlaskConical" value={labsOnly.length} label="Labs Built" sub={`across ${[...new Set(labsOnly.map(l=>l.platform))].length} platforms`} color="emerald"/>
+                        <StatCard icon="FolderOpen" value={projects.length} label="Projects" sub="GitHub + Tools" color="blue"/>
+                        <StatCard icon="FileText" value={certificationReviews.length} label="Reviews" sub="cert writeups" color="yellow"/>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-gray-100">
+                            <SectionToggle title="Certs by Issuer" icon="Building2" iconColor="text-purple-500" show={showByIssuer} onToggle={()=>setShowByIssuer(v=>!v)}/>
+                            {showByIssuer && (
+                                <div className="space-y-1 mt-5">
+                                    {sortedIssuers.map(([issuer,count])=>(
+                                        <BarRow key={issuer} label={issuer} count={count} max={maxIssuer} colorClass="bg-gradient-to-r from-purple-400 to-purple-600" pct={Math.round((count/certifications.length)*100)}/>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-gray-100">
+                            <SectionToggle title="Certs by Category" icon="Layers" iconColor="text-emerald-500" show={showByCat} onToggle={()=>setShowByCat(v=>!v)}/>
+                            {showByCat && (
+                                <div className="space-y-3 mt-5">
+                                    {certsByCat.map(({label,count})=>(
+                                        <div key={label} className="flex items-center gap-3 py-1">
+                                            <span className={`w-2 h-2 rounded-full flex-shrink-0 ${catColors[label]?.dot}`}/>
+                                            <span className="text-sm text-gray-700 w-44 flex-shrink-0 truncate" title={label}>{label}</span>
+                                            <div className="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden">
+                                                <div className={`h-4 rounded-full transition-all ${catColors[label]?.bar}`} style={{width:`${Math.round((count/maxCat)*100)}%`}}/>
+                                            </div>
+                                            <span className="text-sm font-bold text-gray-700 w-5 text-right">{count}</span>
+                                            <span className="text-xs text-gray-400 w-9 text-right">{certifications.length?Math.round((count/certifications.length)*100):0}%</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-gray-100">
+                        <SectionToggle title="Certifications by Year" icon="TrendingUp" iconColor="text-purple-500" show={showByYear} onToggle={()=>setShowByYear(v=>!v)}/>
+                        {showByYear && sortedYears.length>0 && (
+                            <div className="mt-5">
+                                <div className="flex items-end gap-3 h-28">
+                                    {sortedYears.map(([year,count])=>(
+                                        <div key={year} className="flex-1 flex flex-col items-center gap-1 min-w-0">
+                                            <span className="text-sm font-bold text-purple-600">{count}</span>
+                                            <div className="w-full rounded-t-lg bg-gradient-to-t from-purple-600 to-emerald-500" style={{height:`${Math.round((count/maxYear)*80)}px`}}/>
+                                            <span className="text-xs text-gray-500 truncate w-full text-center">{year}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="bg-white rounded-xl p-6 shadow-lg border-2 border-gray-100">
+                        <SectionToggle title="Labs &amp; Projects by Platform" icon="Globe" iconColor="text-emerald-500" show={showByPlatform} onToggle={()=>setShowByPlatform(v=>!v)}/>
+                        {showByPlatform && (
+                            <div className="space-y-1 mt-5">
+                                {sortedPlatforms.map(([platform,count])=>(
+                                    <BarRow key={platform} label={platform} count={count} max={maxPlatform} colorClass="bg-gradient-to-r from-emerald-400 to-emerald-600" pct={Math.round((count/labs.length)*100)}/>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                );
+            };
+
+            // ─────────────────────────────────────────────────────────────────
+            // RENDER
+            // ─────────────────────────────────────────────────────────────────
+            const renderPage = () => {
+                switch(activePage) {
+                    case 'home': return <HomePage/>;
+                    case 'certifications': return <CertificationsPage/>;
+                    case 'labs': return <LabsPage/>;
+                    case 'achievements': return <AchievementsPage/>;
+                    case 'stats': return <StatsPage/>;
+                    default: return <HomePage/>;
+                }
+            };
+
+            return (
+                <div className={`min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/40 to-emerald-50/30${darkMode?' dark':''}`}>
+                    <nav className="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100/80">
+                        <div className="max-w-6xl mx-auto px-4">
+                            <div className="flex justify-between items-center py-3">
+                                {/* Brand */}
+                                <div className="flex items-center gap-2.5">
+                                    <div className="relative flex-shrink-0">
+                                        <img src={AVATAR} alt="r3duan" className="w-9 h-9 rounded-xl shadow-sm"/>
+                                        <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-white"></span>
+                                    </div>
+                                    <span className="text-lg font-extrabold bg-gradient-to-r from-purple-600 to-emerald-500 bg-clip-text text-transparent tracking-tight" style={{fontFamily:'Share Tech Mono, monospace'}}>r3duan</span>
+                                </div>
+                                {/* Nav + controls */}
+                                <div className="flex items-center gap-1.5">
+                                    <div className="hidden md:flex gap-0.5 items-center">
+                                        {navigation.map(item => (
+                                            <button key={item.id} onClick={()=>setActivePage(item.id)}
+                                                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-all ${activePage===item.id?'bg-purple-600 text-white shadow-sm shadow-purple-200':'text-gray-600 hover:bg-gray-100'}`}>
+                                                <Icon name={item.icon} className="w-4 h-4"/>
+                                                <span>{item.label}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <button onClick={()=>setDarkMode(!darkMode)}
+                                        className="p-2 rounded-xl hover:bg-gray-100 transition-colors" title={darkMode?'Light mode':'Dark mode'}>
+                                        <Icon name={darkMode?'Sun':'Moon'} className="w-4 h-4 text-gray-600"/>
+                                    </button>
+                                    <button className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors" onClick={()=>setMobileMenuOpen(!mobileMenuOpen)}>
+                                        <Icon name={mobileMenuOpen?'X':'Menu'} className="w-5 h-5 text-gray-600"/>
+                                    </button>
+                                </div>
+                            </div>
+                            {/* Mobile menu */}
+                            {mobileMenuOpen && (
+                                <div className="md:hidden pb-3 pt-2 border-t border-gray-100 flex flex-col gap-0.5 animate-slideDown">
+                                    {navigation.map(item => (
+                                        <button key={item.id} onClick={()=>{setActivePage(item.id);setMobileMenuOpen(false);}}
+                                            className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all text-left w-full ${activePage===item.id?'bg-purple-50 text-purple-700 font-semibold':'text-gray-600 hover:bg-gray-50'}`}>
+                                            <Icon name={item.icon} className={`w-4 h-4 ${activePage===item.id?'text-purple-500':'text-gray-400'}`}/>
+                                            <span>{item.label}</span>
+                                            {activePage===item.id && <Icon name="ChevronRight" className="w-4 h-4 ml-auto text-purple-400"/>}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </nav>
+                    <main className="max-w-6xl mx-auto px-4 py-10">
+                        {renderPage()}
+                    </main>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<Portfolio/>, document.getElementById('root'));
+    </script>
+</body>
+</html>
