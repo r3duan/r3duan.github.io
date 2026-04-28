@@ -1,0 +1,90 @@
+[
+  {
+    "name": "BTL1 - Blue Team Level 1",
+    "issuer": "Security Blue Team",
+    "year": "2024",
+    "category": "Blue Team & Detection",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/6366f1/ffffff?text=BTL1",
+    "url": "https://securityblue.team/certifications/btl1",
+    "certificate": null,
+    "latest": false
+  },
+  {
+    "name": "CCDL2 - Certified Cyber Defender Level 2",
+    "issuer": "CyberDefenders",
+    "year": "2024",
+    "category": "Blue Team & Detection",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/0ea5e9/ffffff?text=CCDL2",
+    "url": "https://cyberdefenders.org/",
+    "certificate": null,
+    "latest": false
+  },
+  {
+    "name": "SAL1 - Security Analyst Level 1",
+    "issuer": "TryHackMe",
+    "year": "2024",
+    "category": "Blue Team & Detection",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/06b6d4/ffffff?text=SAL1",
+    "url": "https://tryhackme.com/p/r3duan",
+    "certificate": null,
+    "latest": false
+  },
+  {
+    "name": "AZ-500 - Azure Security Engineer Associate",
+    "issuer": "Microsoft",
+    "year": "2025",
+    "category": "Cloud Security",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/a855f7/ffffff?text=AZ-500",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-security-engineer/",
+    "certificate": null,
+    "latest": true
+  },
+  {
+    "name": "AZ-900 - Azure Fundamentals",
+    "issuer": "Microsoft",
+    "year": "2024",
+    "category": "Cloud Security",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/8b5cf6/ffffff?text=AZ-900",
+    "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals/",
+    "certificate": null,
+    "latest": false
+  },
+  {
+    "name": "CKA - Certified Kubernetes Administrator",
+    "issuer": "The Linux Foundation",
+    "year": "2025",
+    "category": "Cloud Security",
+    "status": "In Progress",
+    "badge": "https://placehold.co/120x120/22d3ee/ffffff?text=CKA",
+    "url": "https://www.cncf.io/training/certification/cka/",
+    "certificate": null,
+    "latest": false
+  },
+  {
+    "name": "PT1 - Junior Penetration Tester",
+    "issuer": "TryHackMe",
+    "year": "2024",
+    "category": "Offensive Security",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/ef4444/ffffff?text=PT1",
+    "url": "https://tryhackme.com/p/r3duan",
+    "certificate": null,
+    "latest": false
+  },
+  {
+    "name": "CompTIA Security+",
+    "issuer": "CompTIA",
+    "year": "2024",
+    "category": "General & Foundational",
+    "status": "Active",
+    "badge": "https://placehold.co/120x120/14b8a6/ffffff?text=SEC%2B",
+    "url": "https://www.comptia.org/certifications/security",
+    "certificate": null,
+    "latest": false
+  }
+]
