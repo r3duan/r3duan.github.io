@@ -1,0 +1,26 @@
+[
+  {
+    "platform": "GitHub",
+    "handle": "@r3duan",
+    "url": "https://github.com/r3duan",
+    "icon": "Github"
+  },
+  {
+    "platform": "LinkedIn",
+    "handle": "/in/reduan-islam",
+    "url": "https://www.linkedin.com/in/reduan-islam",
+    "icon": "Linkedin"
+  },
+  {
+    "platform": "Twitter / X",
+    "handle": "@r3duan",
+    "url": "https://twitter.com/r3duan",
+    "icon": "Twitter"
+  },
+  {
+    "platform": "Email",
+    "handle": "reduan7701@gmail.com",
+    "url": "mailto:reduan7701@gmail.com",
+    "icon": "Mail"
+  }
+]

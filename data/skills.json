@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Cloud & Identity",
+    "items": ["Microsoft Azure", "Microsoft 365", "Entra ID", "Conditional Access", "PIM", "Intune", "Purview", "Kubernetes", "Defender XDR"]
+  },
+  {
+    "category": "Incident Response",
+    "items": ["Sigma Rules", "SIEM Correlation", "Case Management", "Alert Triage", "Microsoft Sentinel", "Wazuh", "Splunk", "TheHive"]
+  },
+  {
+    "category": "Tools & Platforms",
+    "items": ["Autopsy", "Volatility 3", "Wireshark", "FTK Imager", "KAPE", "Eric Zimmerman Tools", "PhishTool", "Burp Suite"]
+  },
+  {
+    "category": "Blue Team & Threat Intel",
+    "items": ["SOC Operations", "Security Monitoring", "Threat Intelligence", "MITRE ATT&CK", "Cyber Kill Chain", "APT / IOC Analysis", "Memory Forensics"]
+  }
+]

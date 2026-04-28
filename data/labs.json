@@ -1,0 +1,140 @@
+[
+  {
+    "type": "lab",
+    "title": "SAL1 — Security Analyst Level 1 Path",
+    "platform": "TryHackMe",
+    "difficulty": "medium",
+    "player_difficulty": "medium",
+    "rating": 4.5,
+    "description": "Completed the entire SAL1 learning path covering SIEM analysis, alert triage, SOC fundamentals, and incident handling. Earned the SAL1 certification on first attempt.",
+    "tags": ["SOC", "SIEM", "Triage", "IR"],
+    "tactics": ["Initial Access", "Defense Evasion", "Credential Access"],
+    "link": "https://tryhackme.com/p/r3duan",
+    "is_retired": false,
+    "image": null
+  },
+  {
+    "type": "lab",
+    "title": "CCDL2 — Cyber Defender Level 2",
+    "platform": "CyberDefenders",
+    "difficulty": "hard",
+    "player_difficulty": "hard",
+    "rating": 4.8,
+    "description": "Level 2 challenge covering live incident response, memory forensics, threat hunting, and complex log correlation. Completed with cert.",
+    "tags": ["DFIR", "Memory Forensics", "Threat Hunting"],
+    "tactics": ["Execution", "Persistence", "Lateral Movement"],
+    "link": "https://cyberdefenders.org/",
+    "is_retired": false,
+    "image": null
+  },
+  {
+    "type": "lab",
+    "title": "BTL1 — Blue Team Level 1 Practical",
+    "platform": "Security Blue Team",
+    "difficulty": "medium",
+    "player_difficulty": "medium",
+    "rating": 4.7,
+    "description": "Security Blue Team's BTL1 covers phishing analysis, threat intel, digital forensics, SIEM, and incident response. Passed the 24-hour practical exam.",
+    "tags": ["Phishing", "DFIR", "IR Report"],
+    "tactics": ["Initial Access", "Collection", "Exfiltration"],
+    "link": "https://securityblue.team/",
+    "is_retired": false,
+    "image": null
+  },
+  {
+    "type": "lab",
+    "title": "Memory Forensics with Volatility",
+    "platform": "CyberDefenders",
+    "difficulty": "medium",
+    "player_difficulty": "medium",
+    "rating": 4.3,
+    "description": "Series of memory forensics challenges using Volatility 3 to analyze Windows memory dumps, extract running processes, dump credentials, and trace attacker activity.",
+    "tags": ["Volatility", "Memory", "Malware"],
+    "tactics": ["Defense Evasion", "Credential Access"],
+    "link": "https://cyberdefenders.org/",
+    "is_retired": false,
+    "image": null
+  },
+  {
+    "type": "lab",
+    "title": "KAPE Triage & Artifact Analysis",
+    "platform": "HackTheBox",
+    "difficulty": "easy",
+    "player_difficulty": "easy",
+    "rating": 4.2,
+    "description": "Used KAPE to triage a compromised Windows host, collect key forensic artifacts (registry, prefetch, jumplists, event logs), and reconstruct the timeline of a phishing-driven malware infection.",
+    "tags": ["KAPE", "Windows Forensics", "Timeline"],
+    "tactics": ["Initial Access", "Persistence"],
+    "link": "https://app.hackthebox.com/sherlocks",
+    "is_retired": false,
+    "image": null
+  },
+  {
+    "type": "lab",
+    "title": "Phishing Email Analysis with PhishTool",
+    "platform": "TryHackMe",
+    "difficulty": "easy",
+    "player_difficulty": "easy",
+    "rating": 4.0,
+    "description": "Hands-on phishing email triage workflow combining header analysis, URL detonation, attachment sandboxing, and IOC pivoting into Defender XDR.",
+    "tags": ["Email Analysis", "PhishTool", "IOC"],
+    "tactics": ["Initial Access"],
+    "link": "https://tryhackme.com/p/r3duan",
+    "is_retired": false,
+    "image": null
+  },
+  {
+    "type": "project",
+    "title": "SIEM Automation Home Lab",
+    "platform": "Original",
+    "description": "Built a full SOC environment from scratch using VMware ESXi. Deployed Wazuh agents on Windows and Linux endpoints, wrote custom detection rules, and integrated alerts into TheHive for case management. Mapped every detection rule to MITRE ATT&CK.",
+    "tags": ["Wazuh", "TheHive", "VMware", "Detection Eng", "Tool"],
+    "link": "https://github.com/r3duan/siem-homelab",
+    "image": null
+  },
+  {
+    "type": "project",
+    "title": "Microsoft Sentinel Deployment R&D",
+    "platform": "Original",
+    "description": "Researched and implemented a full Microsoft Sentinel deployment for client environments. Wrote KQL hunting queries, configured analytic rules, set up automated response with Logic Apps, and integrated Defender XDR signals into a single SOC pane.",
+    "tags": ["Sentinel", "KQL", "Defender XDR", "SOAR"],
+    "link": "https://github.com/r3duan/sentinel-deployment",
+    "image": null
+  },
+  {
+    "type": "project",
+    "title": "Tenant-Wide Intune CIS Baselines",
+    "platform": "Original",
+    "description": "Built and rolled out CIS-aligned Intune baselines across multiple Microsoft 365 tenants — ASR rules, Defender AV/EDR, Windows Hello, and Conditional Access. Reduced client attack surface measurably.",
+    "tags": ["Intune", "CIS Benchmarks", "ASR Rules", "Conditional Access", "Tool"],
+    "link": "https://github.com/r3duan/intune-baselines",
+    "image": null
+  },
+  {
+    "type": "project",
+    "title": "Tenant-to-Tenant Migration Playbook",
+    "platform": "Medium",
+    "description": "Led multiple Tenant-to-Tenant migrations and Google Workspace → Microsoft 365 onboarding projects. Maintained SPF, DKIM, DMARC and Purview compliance during cutovers. Documented as a public playbook.",
+    "tags": ["M365", "Google Workspace", "DMARC", "Purview"],
+    "link": "https://medium.com/@r3duan",
+    "image": null
+  },
+  {
+    "type": "project",
+    "title": "Phishing Triage Workflow",
+    "platform": "Original",
+    "description": "Standardized phishing email triage workflow combining header analysis, PhishTool, Defender pivoting, and sandbox detonation — designed to give clients a verdict in under 5 minutes.",
+    "tags": ["Phishing", "PhishTool", "Tool"],
+    "link": "https://github.com/r3duan/phish-triage",
+    "image": null
+  },
+  {
+    "type": "project",
+    "title": "Web App Pentest Reports (Internships)",
+    "platform": "Original",
+    "description": "During internships at Certifence and Cyber Secured India, performed real-world web & mobile app pentests on client targets. Documented findings using CVSS and produced professional reports with reproduction steps and remediation guidance.",
+    "tags": ["Web Pentest", "Burp Suite", "SQLmap"],
+    "link": "https://github.com/r3duan/pentest-reports",
+    "image": null
+  }
+]

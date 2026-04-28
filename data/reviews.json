@@ -1,0 +1,42 @@
+[
+  {
+    "name": "BTL1 Review",
+    "issuer": "Security Blue Team",
+    "rating": 4.7,
+    "verdict": "Highly recommend for SOC L1 aspirants",
+    "summary": "The 24-hour practical exam is the standout. You're handed a real attack scenario and have to investigate it end-to-end — phishing, malware, lateral movement, exfil — and write a full IR report.",
+    "url": "/reviews/btl1.html"
+  },
+  {
+    "name": "AZ-500 Review",
+    "issuer": "Microsoft",
+    "rating": 4.5,
+    "verdict": "Best cloud-sec cert for M365 admins",
+    "summary": "Passed first try with John Savill's videos plus hands-on tenant work. The exam scenarios mirror real client problems — Conditional Access, PIM, Defender for Cloud, and Sentinel.",
+    "url": "/reviews/az-500.html"
+  },
+  {
+    "name": "CCDL2 Review",
+    "issuer": "CyberDefenders",
+    "rating": 4.8,
+    "verdict": "Hardest blue-team cert I've taken",
+    "summary": "Live IR scenarios are unforgiving but rewarding. Memory forensics with Volatility, log correlation across multiple sources, and threat hunting all stretched my skills.",
+    "url": "/reviews/ccdl2.html"
+  },
+  {
+    "name": "SAL1 Review",
+    "issuer": "TryHackMe",
+    "rating": 4.3,
+    "verdict": "Solid intro to SOC analyst work",
+    "summary": "Great structured path covering SIEM analysis, phishing triage, and IR fundamentals. Best paired with hands-on lab time on Splunk or Sentinel afterward.",
+    "url": "/reviews/sal1.html"
+  },
+  {
+    "name": "CompTIA Security+ Review",
+    "issuer": "CompTIA",
+    "rating": 4.0,
+    "verdict": "Industry baseline — worth doing",
+    "summary": "Broad but shallow. It's the cert that opens doors more than it teaches deep skills, but the breadth of coverage is genuinely useful for context.",
+    "url": "/reviews/sec-plus.html"
+  }
+]

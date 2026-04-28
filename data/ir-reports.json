@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Phishing Campaign Investigation in M365 Tenant",
+    "platform": "Smart Tech",
+    "date": "2025-03-12",
+    "url": "/ir-reports/phishing-m365.html",
+    "tags": ["Phishing", "Defender XDR", "Sentinel"],
+    "summary": "Investigated a wide-scale phishing campaign targeting client M365 users. Used Defender XDR + Sentinel to identify compromised mailboxes, contain spread, and reset MFA across affected accounts."
+  },
+  {
+    "title": "Suspicious Sign-in Triage Walkthrough",
+    "platform": "Smart Tech",
+    "date": "2025-02-08",
+    "url": "/ir-reports/suspicious-signin.html",
+    "tags": ["Entra ID", "Identity", "MFA"],
+    "summary": "Walkthrough of a suspicious sign-in alert triage workflow using Entra ID logs, Risk Detections, and Conditional Access policies to confirm and remediate."
+  }
+]

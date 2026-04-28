@@ -1,0 +1,80 @@
+[
+  {
+    "category": "competition",
+    "name": "Smart Technologies — Solutions Engineer",
+    "organizer": "Smart Technologies",
+    "year": 2025,
+    "type": "Career",
+    "team": "Cloud & Security Team",
+    "placement": "Current",
+    "description": "Running Cloud & Security operations across multiple Microsoft 365 tenants — Entra ID identity governance, Conditional Access, PIM, Defender XDR triage, Microsoft Sentinel monitoring, and Intune CIS-aligned baselines.",
+    "tags": ["M365", "Sentinel", "Intune", "SOC"],
+    "url": null,
+    "image": null
+  },
+  {
+    "category": "competition",
+    "name": "Cyber Secured India Internship",
+    "organizer": "Cyber Secured India",
+    "year": 2024,
+    "type": "Internship",
+    "team": "Solo",
+    "placement": "Completed",
+    "description": "3-month structured internship covering Web & Mobile Application Penetration Testing, Privilege Escalation techniques, Digital Forensics tooling, and Cloud Security fundamentals.",
+    "tags": ["Web Pentest", "Mobile Pentest", "DFIR"],
+    "url": null,
+    "image": null
+  },
+  {
+    "category": "competition",
+    "name": "Certifence Pentest Internship",
+    "organizer": "Certifence (India)",
+    "year": 2024,
+    "type": "Internship",
+    "team": "Solo",
+    "placement": "Completed",
+    "description": "Worked through professional pentest engagements on real client web apps. Got hands-on with SQLmap, Nessus, Acunetix, Bloodhound, Metasploit, and Cobalt Strike. Wrote my first professional pentest report.",
+    "tags": ["Burp Suite", "SQLmap", "Nessus", "Bloodhound"],
+    "url": null,
+    "image": null
+  },
+  {
+    "category": "competition",
+    "name": "WebBattalion Blue Team Internship",
+    "organizer": "WebBattalion (CodemanBD)",
+    "year": 2023,
+    "type": "Internship",
+    "team": "Solo",
+    "placement": "Completed",
+    "description": "First professional security role — performed pentesting on real-world targets, learned to write structured reports, and built my first SIEM home lab using Wazuh and Splunk on the Blue Team side.",
+    "tags": ["Pentest", "Wazuh", "Splunk", "Home Lab"],
+    "url": null,
+    "image": null
+  },
+  {
+    "category": "competition",
+    "name": "BSc in Computer Science & Engineering",
+    "organizer": "Green University of Bangladesh",
+    "year": 2024,
+    "type": "Degree",
+    "team": "Solo",
+    "placement": "CGPA 3.63",
+    "description": "Completed a BSc in Computer Science & Engineering with a 3.63 CGPA. Coursework covered networking, OS internals, database systems, and software engineering — the foundation that the security stack sits on.",
+    "tags": ["CSE", "Bangladesh", "Education"],
+    "url": null,
+    "image": null
+  },
+  {
+    "category": "competition",
+    "name": "AZ-500 Passed on First Attempt",
+    "organizer": "Microsoft",
+    "year": 2025,
+    "type": "Cert Win",
+    "team": "Solo",
+    "placement": "1st Try",
+    "description": "Passed AZ-500 (Azure Security Engineer Associate) on first attempt — a major milestone for my cloud security track. Studied alongside hands-on tenant work which made practical questions intuitive.",
+    "tags": ["Azure", "Cloud Security"],
+    "url": null,
+    "image": null
+  }
+]

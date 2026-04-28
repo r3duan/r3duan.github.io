@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Hunting Phishing Emails in Microsoft Sentinel with KQL",
+    "category": "Detection Engineering",
+    "date": "2025-03-15",
+    "url": "/research/hunting-phishing-sentinel.html",
+    "tags": ["Sentinel", "KQL", "Phishing"],
+    "summary": "Step-by-step walkthrough of the KQL queries I use to detect phishing campaigns in Sentinel — suspicious sender domains, unusual send patterns, and clickthrough analysis."
+  },
+  {
+    "title": "Mapping a Real Incident to MITRE ATT&CK",
+    "category": "Threat Intel",
+    "date": "2024-11-22",
+    "url": "/research/mitre-mapping.html",
+    "tags": ["MITRE", "ATT&CK", "Threat Intel"],
+    "summary": "Walking through a real-world incident at Smart Tech and showing how to map every observed technique to MITRE ATT&CK — turning the mapping into Sigma detection rules."
+  },
+  {
+    "title": "Conditional Access in Practice",
+    "category": "Cloud Security",
+    "date": "2025-01-18",
+    "url": "/research/conditional-access.html",
+    "tags": ["Entra ID", "Zero Trust", "M365"],
+    "summary": "Designing and rolling out Conditional Access policies across multiple M365 tenants — MFA enforcement, location filtering, device compliance, and break-glass account gotchas."
+  }
+]
